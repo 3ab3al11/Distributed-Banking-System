@@ -182,3 +182,16 @@ When a user submits a client operation (`POST`, `PUT`, `DELETE`) to any slave no
 ### 2. Multi-threaded Replication
 The active master processes the write in its local RAM storage, then sends parallel HTTP `POST /replicate` requests to all other nodes concurrently using goroutines.
 If any node is offline or slow, the master logs a warning but proceeds immediately without blocking client requests.
+## Screenshots
+
+### Distributed Database Command Center
+![Distributed Database Command Center](docs/screenshots/1780077307034.jpg)
+
+### Distributed Network Visualization
+![Distributed Network Visualization](docs/screenshots/1780077306418.jpg)
+
+### Master Node Dashboard
+![Master Node Dashboard](docs/screenshots/1780077306513.jpg)
+
+### Slave Node Dashboard
+![Slave Node Dashboard](docs/screenshots/1780077306983.jpg)
