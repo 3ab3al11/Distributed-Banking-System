@@ -1,0 +1,65 @@
+Distributed Banking System - Run Commands
+
+Open each command in a separate terminal inside the project folder.
+
+Setup:
+go mod tidy
+py -m pip install -r requirements.txt
+
+Master:
+go run ./cmd/api
+http://localhost:8080/clients
+http://localhost:8080/health
+
+Slave1:
+go run ./cmd/slave
+http://localhost:8081/clients
+http://localhost:8081/health
+
+Slave2:
+py app.py
+http://localhost:5000/clients
+http://localhost:5000/health
+
+Slave3:
+go run ./cmd/slave3
+http://localhost:8082/clients
+http://localhost:8082/health
+
+Dashboard:
+streamlit run streamlit_app.py
+http://localhost:8501
+
+Optional Slave4:
+py app_slave4.py
+http://localhost:5001/clients
+http://localhost:5001/health
+
+Localhost environment variables for Streamlit if needed:
+$env:MASTER_URL="http://localhost:8080"
+$env:SLAVE1_URL="http://localhost:8081"
+$env:SLAVE2_URL="http://localhost:5000"
+$env:SLAVE3_URL="http://localhost:8082"
+$env:SLAVE4_URL="http://localhost:5001"
+
+Then run:
+streamlit run streamlit_app.py
+
+Demo Steps:
+1. Start all nodes.
+2. Add client from dashboard.
+3. Open /clients on every node to show replication.
+4. Stop Master with CTRL + C.
+5. Refresh dashboard.
+6. Add client from an online slave to show failover.
+7. Do not restart Master in the same demo because RAM data will be empty.
+
+LAN Example:
+If Master IP is 172.20.10.4, run this on each slave machine:
+
+$env:MASTER_URL="http://172.20.10.4:8080"
+
+Then run your slave command:
+Slave1: go run ./cmd/slave
+Slave2: py app.py
+Slave3: go run ./cmd/slave3
